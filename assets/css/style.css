@@ -80,6 +80,7 @@ video::-webkit-media-controls-current-time-display {
   background-attachment: fixed;
   background-size: 100%;
   background-repeat: no-repeat;
+  background-color: #232323;
   z-index: 9999;
 }
 .uhyu-m {

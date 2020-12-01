@@ -1066,6 +1066,7 @@
         return {
             main_root : $( text_main_root ),
             ajax_click : $( "a.effect-ajax " ),
+            main_moblie_bg : $(".main2.main_m_bg_href"),
             isEffectAjax : function () {
                 return !body.hasClass( "dsn-ajax" );
             },
@@ -1075,6 +1076,26 @@
                     this.ajax_click.off( "click" );
                 }
 
+                this.main_moblie_bg.on("click", function(e){
+                    if ( $parent.isEffectAjax() ) return;
+                    e.preventDefault();
+
+
+                    var _that = $( this );
+                    var url = _that.attr( "href" );
+                    if ( url.indexOf( "#" ) >= 0 || url === undefined ) {
+                        return;
+                    }
+
+
+                    if ( !isAjax ) return;
+                    isAjax = false;
+                    effectScroller().locked();
+
+
+                    $parent.ajaxLoaderElemnt( true );
+                    $parent.ajaxSlider_m( _that, url );    
+                })
 
                 this.ajax_click.on( "click", function ( e ) {
                     if ( $parent.isEffectAjax() ) return;
@@ -1117,15 +1138,38 @@
                 } );
 
             },
+            ajaxSlider_m : function ( $e, url ) {
+                let $parent = this;
+                let img = $e;
+                
+                if(img.hasClass("main1") && img.css( "display" ) == "none") img = $( ".dsn-slider .slide-item[data-dsn-id=\"" + id + "\"] .cover-bg.main2" ).first();
+                let _url = url;
+                if ( _url !== undefined ) {
+
+                    TweenMax.to( ".project-metas , .nav-slider ,.footer-slid ,.view-all , .dsn-all-work ", 0.8, {
+                        autoAlpha : 0,
+                        scale : 0.8,
+                        // y: 50,
+                        onComplete : function () {
+                            img.removeClass( "hidden" );
+                            img.find( "img" ).addClass( "hidden" );
+                            $parent.createElement( img, _url, $( ".dsn-root-slider" ) );
+                        },
+                    } );
+                }
+
+
+            },
 
             ajaxSlider : function ( $e, url ) {
                 let $parent = this;
-
                 let
                     active = $e.parents( ".slide-content" ),
                     id = active.data( "dsn-id" ),
                     img = $( ".dsn-slider .slide-item[data-dsn-id=\"" + id + "\"] .cover-bg" ).first();
 
+                
+                if(img.hasClass("main1") && img.css( "display" ) == "none") img = $( ".dsn-slider .slide-item[data-dsn-id=\"" + id + "\"] .cover-bg.main2" ).first();
                 let _url = url;
                 if ( _url !== undefined ) {
 
