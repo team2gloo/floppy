@@ -80,7 +80,8 @@
             if ( $ofContent !== undefined ) {
                 $top = $ofContent.top - 100;
             }
-            else $top = $(".img-title").height() -100;
+            else if($(".img-title").length>0) $top = $(".img-title").height() -100;
+            else $top = $(".img-title-u").height() -100;
             if ( bodyScroll > $top ) {
                 // console.log('start')
                 if ( scrDown < bodyScroll ) {
