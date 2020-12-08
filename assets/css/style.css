@@ -95,12 +95,11 @@ video::-webkit-media-controls-current-time-display {
 }
 .img-title-u-m {
   width: 100%;
-  height: 100vh;
-  background-image: url("../img/eglru_title_m.png");
-  background-attachment: fixed;
-  background-size: 100%;
+  height: auto;
+  background-image: url("../img/uhyu_title_m.png");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-color: #232323;
+  background-position: center;
   z-index: 9999;
 }
 .uhyu-m {
